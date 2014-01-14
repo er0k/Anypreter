@@ -178,7 +178,7 @@ class anypreter(sublime_plugin.TextCommand):
 		if not encryption: return code # Else return untouched code
 
 		# Return the encrypted and break-stripped code
-		return str(code).encode(encryption).replace("\n", "")
+		return str(code.encode('utf-8')).encode(encryption).replace("\n", "")
 
 
 
@@ -296,7 +296,10 @@ class anypreter(sublime_plugin.TextCommand):
 
 		edit = panel.begin_edit() # Start editing
 
-		panel.insert(edit, panel.size(), value.decode('utf-8')) # Insert the output
+		try:
+			panel.insert(edit, panel.size(), value.decode('utf-8')) # Insert the output
+		except UnicodeError:
+			panel.insert(edit, panel.size(), value.decode("ISO-8859-1"))
 		panel.end_edit(edit) # End the editing
 
 		# Lock and display the panel
