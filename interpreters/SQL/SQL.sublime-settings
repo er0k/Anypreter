@@ -1,0 +1,9 @@
+[
+    {
+        "Name": "MySQL (poptent)",
+        "plain_wrapper": "",
+        "encryption": "",
+        "command": "mysql -t -e \"%code%\" 2>&1"
+    }
+]
+
